@@ -9,8 +9,8 @@ namespace BarCodeApi
         private string[] names = { "Heelo", "Dima", "Vasya", "Petya", "Oleg" };
         private string[] surnames = { "Heelo", "Dash", "Play", "Bones", "SNOT" };
         private string[] midnames = { "Heelo", "Dmitrievich", "Vasilievich", "Petrovich", "Olegvich" };
-
-
+        
+        //создай проверку использованных айдишников
 
         public string GetRandomName()
         {
