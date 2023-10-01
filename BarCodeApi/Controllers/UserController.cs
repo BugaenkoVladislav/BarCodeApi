@@ -3,26 +3,28 @@ using IronSoftware;
 using IronSoftware.Drawing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp.Drawing;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection.Metadata;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BarCodeApi.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        
+
         DataClass dataClass = new DataClass();
         UsersdbContext db;
-        public UserController(UsersdbContext db) 
+        public UserController(UsersdbContext db)
         {
             this.db = db;
         }
-        
+
         [HttpGet("/GenerateAllBarCodes")]
         public IActionResult GenerateAllBarCodes(int countOfUsers)
         {
@@ -36,7 +38,7 @@ namespace BarCodeApi.Controllers
                 {
                     var myBarCode = BarcodeWriter.CreateBarcode(Convert.ToString(i.IdUser), BarcodeWriterEncoding.QRCode);
                     Bitmap bmp = myBarCode.ToBitmap();
-                    pdf.DrawBitmap(bmp, 0, 50, iter * 50, 50, 50); 
+                    pdf.DrawBitmap(bmp, 0, 50, iter * 50, 50, 50);
                     iter++;
                 }
                 pdf.SaveAs("drawText.pdf");
@@ -44,8 +46,8 @@ namespace BarCodeApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500,ex.Message);
-            }           
+                return StatusCode(500, ex.Message);
+            }
         }
 
 
@@ -55,23 +57,23 @@ namespace BarCodeApi.Controllers
             try
             {
                 Models.User? user = db.Users.FirstOrDefault(x => x.IdUser == id);
-                if ( user != null){
+                if (user != null) {
                     var myBarcode = BarcodeWriter.CreateBarcode(user.IdUser.ToString(), BarcodeEncoding.QRCode);
                     Bitmap bitmap = myBarcode.ToBitmap();
-                    return File((ConvertToByteArray(bitmap)),"image/jpeg");
+                    return File((ConvertToByteArray(bitmap)), "image/jpeg");
                 }
                 else
                 {
                     return NotFound();
-                }                                                                            
-                
+                }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return StatusCode(500,ex.Message);
+                return StatusCode(500, ex.Message);
             }
         }
-       
+
         private void Generator(int times)
         {
             if (db.Users.Count() == 0)
@@ -93,12 +95,12 @@ namespace BarCodeApi.Controllers
                 }
 
             }
-            
-           
+
+
         }
         private byte[] ConvertToByteArray(Bitmap bmp)
         {
-            using(MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 return ms.ToArray();
@@ -107,5 +109,6 @@ namespace BarCodeApi.Controllers
             }
         }
 
-    }
+    }  
+
 }
