@@ -35,6 +35,8 @@
             Grid.Column="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Name="allQRGenerator"
+            Click="AllQRGenerator_Click"
             Content="Generate All QR Codes" />
         <Image
             Name="userQR"
@@ -50,7 +52,7 @@
             Grid.Column="0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Click="userIdGenerator_Click"
+            Click="UserIdGenerator_Click"
             Content="Generate User QR From ID" />
         <TextBox
             Name="idUser"

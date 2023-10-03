@@ -41,8 +41,10 @@ namespace BarCodeApi.Controllers
                     pdf.DrawBitmap(bmp, 0, 50, iter * 50, 50, 50);//отрисовыавем QR
                     iter++;
                 }
-                pdf.SaveAs("drawText.pdf");//скачивание пдфки
-                return Ok();
+                string name = "UsersQRCode.pdf";
+                pdf.SaveAs(name);
+                var bytes = System.IO.File.ReadAllBytes(name);
+                return File(bytes, "application/pdf");//возвращаем файл массивом байтов
             }
             catch (Exception ex)
             {
@@ -100,7 +102,7 @@ namespace BarCodeApi.Controllers
         {
             using (MemoryStream ms = new MemoryStream())//создаем новый поток данных
             {
-                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);//cохраняем битмап в формате пнг
+                bmp.Save(ms, ImageFormat.Png);//cохраняем битмап в формате пнг
                 return ms.ToArray();//возвращаем поток  массивом байтов
 
 
