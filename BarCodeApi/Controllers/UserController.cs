@@ -41,7 +41,7 @@ namespace BarCodeApi.Controllers
                     pdf.DrawBitmap(bmp, 0, 50, iter * 50, 50, 50);
                     iter++;
                 }
-                pdf.SaveAs("drawText.pdf");
+                pdf.SaveAs("drawText.pdf");//скачивание пдфки
                 return Ok();
             }
             catch (Exception ex)

@@ -32,23 +32,34 @@ namespace UsersUI
         }
         public async void Generator()
         {
-            BitmapImage bitmapImage = new BitmapImage();
             int id = Convert.ToInt32(idUser.Text);
             using (HttpClient client = new HttpClient())
             {
-                string uri = $"https://localhost:7251/ReturnBarCode?id={id}";
-                client.BaseAddress = new Uri(uri);
-                HttpResponseMessage response = await client.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                using (var ms = new MemoryStream(await response.Content.ReadAsByteArrayAsync()))
+                string uri = $"https://localhost:7251/ReturnBarCode?id={id}";//cсылка на http запрос 
+                client.BaseAddress = new Uri(uri);//указываем ссылку на запрос
+                HttpResponseMessage response = await client.GetAsync(uri);//отправляем запрос 
+                
+                try
                 {
-                    
-                    bitmapImage.StreamSource = ms;
-                    
-                }                
+                    response.EnsureSuccessStatusCode();//убеждаеся что результат положительный
+                    using (var stream = await response.Content.ReadAsStreamAsync())//создаем отдельный поток который считывает ответ сервера в формате изображения
+                    {
+                        var bitmapImage = new BitmapImage();// создаем экземпляр bitmap image
+                        bitmapImage.BeginInit();//используется для начала процесса инициализации объекта
+                        bitmapImage.StreamSource = stream;//указываем streamsource'у(источник в формате потока)  наш поток
+                        bitmapImage.EndInit();//окончание процесса инициализации объекта
+                        userQR.Source = bitmapImage;// указываем наше изобржение
+                    }
+                }
+                catch(HttpRequestException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
+               
+
             }
-            userQR.Source = bitmapImage;//не пашет пофикси 
-            userQR.Visibility = Visibility.Visible;
+            
 
         }
 
