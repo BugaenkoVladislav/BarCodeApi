@@ -31,14 +31,14 @@ namespace BarCodeApi.Controllers
             try
             {
                 ChromePdfRenderer renderer = new ChromePdfRenderer();
-                PdfDocument pdf = renderer.RenderHtmlAsPdf("<h1>TestPDF</h1>");
+                PdfDocument pdf = renderer.RenderHtmlAsPdf("<h1>Список всех сотрудниеов</h1>");
                 Generator(countOfUsers);
                 int iter = 0;
-                foreach (Models.User i in db.Users)
+                foreach (Models.User i in db.Users)//цикл отрисовки всех QR
                 {
-                    var myBarCode = BarcodeWriter.CreateBarcode(Convert.ToString(i.IdUser), BarcodeWriterEncoding.QRCode);
-                    Bitmap bmp = myBarCode.ToBitmap();
-                    pdf.DrawBitmap(bmp, 0, 50, iter * 50, 50, 50);
+                    var myBarCode = BarcodeWriter.CreateBarcode(Convert.ToString(i.IdUser), BarcodeWriterEncoding.QRCode);//cоздаем QR code
+                    Bitmap bmp = myBarCode.ToBitmap();//указываем в битмапе наш QR
+                    pdf.DrawBitmap(bmp, 0, 50, iter * 50, 50, 50);//отрисовыавем QR
                     iter++;
                 }
                 pdf.SaveAs("drawText.pdf");//скачивание пдфки
@@ -74,7 +74,7 @@ namespace BarCodeApi.Controllers
             }
         }
 
-        private void Generator(int times)
+        private void Generator(int times)//создает пользователей в бд 
         {
             if (db.Users.Count() == 0)
             {
@@ -95,15 +95,13 @@ namespace BarCodeApi.Controllers
                 }
 
             }
-
-
         }
-        private byte[] ConvertToByteArray(Bitmap bmp)
+        private byte[] ConvertToByteArray(Bitmap bmp)//конвертация битмапа в ByteArray
         {
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())//создаем новый поток данных
             {
-                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                return ms.ToArray();
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);//cохраняем битмап в формате пнг
+                return ms.ToArray();//возвращаем поток  массивом байтов
 
 
             }
