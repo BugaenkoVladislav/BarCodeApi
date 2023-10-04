@@ -11,23 +11,38 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
-            <RowDefinition Height="250" />
-            <RowDefinition Height="*" />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition  />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock
             Grid.Row="0"
-            Grid.Column="1"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontFamily="Roboto"
             FontSize="24"
             FontWeight="Bold"
             Text="Camera" />
+        <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="8" Grid.RowSpan="3" Source="/rooms.png" Stretch="Fill">
+            
+
+        </Image>
     </Grid>
 </Window>
