@@ -108,10 +108,19 @@ namespace UsersUI
         {
             UserIdGenerator(Convert.ToInt32(idUser.Text));
         }
-
+        private void Print_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
         private void AllQRGenerator_Click(object sender, RoutedEventArgs e)
         {
             AllQRGenerator(4);
+        }
+
+        private void Camera_Click(object sender, RoutedEventArgs e)
+        {
+            Camera camera = new Camera();
+            camera.Show();
         }
     }
 }

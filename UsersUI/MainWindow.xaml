@@ -31,13 +31,22 @@
             FontWeight="Bold"
             Text="UsersSoft" />
         <Button
+            Name="allQRGenerator"
             Grid.Row="1"
             Grid.Column="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Name="allQRGenerator"
             Click="AllQRGenerator_Click"
             Content="Generate All QR Codes" />
+        <Button
+            Name="Print"
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="160,0,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Click="Print_Click"
+            Content="Print" />
         <Image
             Name="userQR"
             Grid.Row="1"
@@ -54,6 +63,16 @@
             VerticalAlignment="Top"
             Click="UserIdGenerator_Click"
             Content="Generate User QR From ID" />
+        <Button
+            Name="camera"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="100"
+            Margin="0,20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Click="Camera_Click"
+            Content="Camera" />
         <TextBox
             Name="idUser"
             Grid.Row="1"
