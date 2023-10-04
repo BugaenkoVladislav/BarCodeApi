@@ -8,8 +8,8 @@
     Title="Camera"
     Width="800"
     Height="450"
-    mc:Ignorable="d">
-    <Grid>
+    mc:Ignorable="d" >
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -41,11 +41,13 @@
             FontWeight="Bold"
             Text="Camera" />
         <Image
-            Grid.Row="2"
-            Grid.RowSpan="3"
-            Grid.Column="1"
-            Grid.ColumnSpan="8"
+            Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="8"
+            Visibility="Visible"
             Source="/rooms.png"
+            Grid.ZIndex="2"
             Stretch="Fill" />
+        <Canvas Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="8" Name="myCanvas">
+            
+        </Canvas>
     </Grid>
 </Window>

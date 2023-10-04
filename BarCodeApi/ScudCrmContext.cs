@@ -5,18 +5,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BarCodeApi;
 
-public partial class UsersdbContext : DbContext
+public partial class ScudCrmContext : DbContext
 {
-    public UsersdbContext()
+    public ScudCrmContext()
     {
     }
 
-    public UsersdbContext(DbContextOptions<UsersdbContext> options)
+    public ScudCrmContext(DbContextOptions<ScudCrmContext> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Room> Rooms { get; set; }
+
+    public virtual DbSet<Status> Statuses { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -24,7 +26,7 @@ public partial class UsersdbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=P@ssw0rd;Database=ScudCRM");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Database=ScudCRM;Password=Chmonya");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -35,18 +37,32 @@ public partial class UsersdbContext : DbContext
             entity.ToTable("Room");
         });
 
+        modelBuilder.Entity<Status>(entity =>
+        {
+            entity.HasKey(e => e.IdStatus).HasName("Status_pkey");
+
+            entity.ToTable("Status");
+
+            entity.Property(e => e.Status1).HasColumnName("Status");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.IdUser).HasName("userdb_pkey");
+            entity.HasKey(e => e.IdUser).HasName("Users_pkey");
 
             entity.ToTable("User");
 
-            entity.Property(e => e.IdUser).ValueGeneratedNever();
+            entity.Property(e => e.IdUser).HasDefaultValueSql("nextval('\"Users_Id_seq\"'::regclass)");
+
+            entity.HasOne(d => d.IdStatusNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.IdStatus)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("User_Status_fkey");
         });
 
         modelBuilder.Entity<UserSustainLogRoom>(entity =>
         {
-            entity.HasKey(e => e.IdSustainLogRoom).HasName("UserSustainLogRoom_pkey");
+            entity.HasKey(e => e.IdUserSustainLogRoom).HasName("UserSustainLogRoom_pkey");
 
             entity.ToTable("UserSustainLogRoom");
 

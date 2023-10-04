@@ -17,10 +17,11 @@ namespace BarCodeApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        
 
         DataClass dataClass = new DataClass();
-        UsersdbContext db;
-        public UserController(UsersdbContext db)
+        ScudCrmContext db;
+        public UserController(ScudCrmContext db)
         {
             this.db = db;
         }
@@ -76,6 +77,23 @@ namespace BarCodeApi.Controllers
             }
         }
 
+        [HttpGet("/ReturnAllUsersStatus")]
+        public IActionResult ReturnAllUsersStatus()
+        {
+            try
+            {
+                return Ok(db.Users.Select(m => new
+                {
+                    m.IdUser,
+                    m.IdStatus
+                }));
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message); 
+            }
+        }
+
         
 
         private void Generator(int times)//создает пользователей в бд 
@@ -111,6 +129,6 @@ namespace BarCodeApi.Controllers
             }
         }
 
-    }  
+    }
 
 }

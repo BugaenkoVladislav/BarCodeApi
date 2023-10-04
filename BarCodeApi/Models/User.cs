@@ -13,5 +13,9 @@ public partial class User
 
     public string Midname { get; set; } = null!;
 
+    public long IdStatus { get; set; }
+
+    public virtual Status IdStatusNavigation { get; set; } = null!;
+
     public virtual ICollection<UserSustainLogRoom> UserSustainLogRooms { get; set; } = new List<UserSustainLogRoom>();
 }
