@@ -76,6 +76,8 @@ namespace BarCodeApi.Controllers
             }
         }
 
+        
+
         private void Generator(int times)//создает пользователей в бд 
         {
             if (db.Users.Count() == 0)

@@ -11,12 +11,12 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition  />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -40,9 +40,12 @@
             FontSize="24"
             FontWeight="Bold"
             Text="Camera" />
-        <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="8" Grid.RowSpan="3" Source="/rooms.png" Stretch="Fill">
-            
-
-        </Image>
+        <Image
+            Grid.Row="2"
+            Grid.RowSpan="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="8"
+            Source="/rooms.png"
+            Stretch="Fill" />
     </Grid>
 </Window>
