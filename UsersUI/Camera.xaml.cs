@@ -39,8 +39,8 @@ namespace UsersUI
                 client.BaseAddress = new Uri(uri);
                 using(HttpResponseMessage  response = await client.GetAsync(uri))
                 {
-                    string json = await response.Content.ReadAsStringAsync();                                       
-                    JArray arr = JArray.Parse(json);                    
+                    string json = await response.Content.ReadAsStringAsync();       //читает json строку                                
+                    JArray arr = JArray.Parse(json);                    //переводит json строку в приемлимый формат
                     //разделяем значения и добавляем в список students
                     foreach (JObject e in arr.Cast<JObject>())
                     {
