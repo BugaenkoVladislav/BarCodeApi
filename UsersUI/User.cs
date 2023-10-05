@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 
@@ -53,6 +55,25 @@ namespace UsersUI
         {
             Grid.SetColumn(user.el, y);
             Grid.SetRow(user.el, x);
+        }
+
+        public static void DrawUsers(List<User> users, Grid grid)//отрисовывает пользователей
+        {
+            for (int i = 0; i < users.Count; i++)
+            {
+                Ellipse ellipse = new Ellipse();
+                ellipse.Height = users[i].Ellipse.Height;
+                ellipse.Width = users[i].Ellipse.Width;
+                ellipse.Fill = users[i].Color;
+                ellipse.StrokeThickness = 1;
+                Grid.SetRow(ellipse, 3);
+                ellipse.Margin = new Thickness((double)i * 5, (double)i * 1, (double)i * 16, (double)i * 10);
+                Grid.SetColumn(ellipse, 1);
+                Grid.SetZIndex(ellipse, 5);//обязательно указывай
+                grid.Children.Insert(i, ellipse);
+            }
+
+
         }
     }
 }

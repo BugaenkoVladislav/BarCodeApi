@@ -49,27 +49,9 @@ namespace UsersUI
                 }
                 
             }
-            DrawUsers();
+            User.DrawUsers(users,grid);
         }
-        private void DrawUsers()//отрисовывает пользователей
-        {
-            for(int i =0;i<users.Count;i++)
-            {
-                Ellipse el = new Ellipse();
-                el.Height = users[i].Ellipse.Height;
-                el.Width = users[i].Ellipse.Width;
-                el.Fill = users[i].Color;
-                el.Stroke = Brushes.Black;
-                el.StrokeThickness = 1;
-                Grid.SetRow(el, 3);
-                el.Margin = new Thickness((double)i *5,(double)i*1, (double)i * 16, (double)i * 10);
-                Grid.SetColumn(el, 1);
-                Grid.SetZIndex(el, 5);//обязательно указывай
-                grid.Children.Insert(i, el);
-            }
-            
-
-        }       
+        
     }
     
 }
