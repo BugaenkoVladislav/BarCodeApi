@@ -44,12 +44,14 @@ namespace UsersUI
                     //разделяем значения и добавляем в список students
                     foreach (JObject e in arr.Cast<JObject>())
                     {
-                        users.Add(new User(Convert.ToInt32(e["idUser"]), Convert.ToInt32(e["idStatus"]),30));//добавляем нового пользователя    ["idUser"] - берется из поля Json в Swagger'e
+                        users.Add(new User(Convert.ToInt32(e["idUser"]), Convert.ToInt32(e["idStatus"]),15));//добавляем нового пользователя    ["idUser"] - берется из поля Json в Swagger'e
+                        
                     }
                 }
                 
             }
-            User.DrawUsers(users,grid);
+            User.DrawUsers(users, grid);
+
         }
         
     }

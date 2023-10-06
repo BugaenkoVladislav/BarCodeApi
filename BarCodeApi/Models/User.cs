@@ -15,7 +15,7 @@ public partial class User
 
     public long IdStatus { get; set; }
 
-    public virtual Status IdStatusNavigation { get; set; } = null!;
+    public virtual Status? IdStatusNavigation { get; set; } = null!;
 
-    public virtual ICollection<UserSustainLogRoom> UserSustainLogRooms { get; set; } = new List<UserSustainLogRoom>();
+    public virtual ICollection<UserSustainLogRoom>? UserSustainLogRooms { get; set; } = new List<UserSustainLogRoom>();
 }

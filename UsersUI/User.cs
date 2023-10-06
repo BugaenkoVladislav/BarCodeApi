@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -57,22 +58,33 @@ namespace UsersUI
             Grid.SetRow(user.el, x);
         }
 
-        public static void DrawUsers(List<User> users, Grid grid)//отрисовывает пользователей
+        public static void DrawUsers(List<User> users, Grid grid)//только отрисовывает пользователей на старте
         {
+            int f = 8;
             for (int i = 0; i < users.Count; i++)
             {
+                
                 Ellipse ellipse = new Ellipse();
                 ellipse.Height = users[i].Ellipse.Height;
                 ellipse.Width = users[i].Ellipse.Width;
                 ellipse.Fill = users[i].Color;
                 ellipse.StrokeThickness = 1;
                 Grid.SetRow(ellipse, 3);
-                ellipse.Margin = new Thickness((double)i * 5, (double)i * 1, (double)i * 16, (double)i * 10);
-                Grid.SetColumn(ellipse, 1);
+                if (i < f)
+                {
+                    Grid.SetColumn(ellipse, i + 1);
+                    ellipse.Margin = new Thickness(0,0,0,0);
+                }
+                else
+                {
+                    Grid.SetColumn(ellipse, (i % f)+1);
+                    ellipse.Margin = new Thickness(0, (i/f)* 50, 0, 0);//возможно не пашет
+                    
+                }
                 Grid.SetZIndex(ellipse, 5);//обязательно указывай
-                grid.Children.Insert(i, ellipse);
+                grid.Children.Insert(i, ellipse);                
             }
-
+            
 
         }
     }

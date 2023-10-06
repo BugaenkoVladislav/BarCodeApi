@@ -14,7 +14,7 @@ public partial class UserSustainLogRoom
 
     public bool Sustain { get; set; }
 
-    public virtual Room IdRoomNavigation { get; set; } = null!;
+    public virtual Room? IdRoomNavigation { get; set; } = null!;
 
-    public virtual User IdUserNavigation { get; set; } = null!;
+    public virtual User? IdUserNavigation { get; set; } = null!;
 }

@@ -9,5 +9,5 @@ public partial class Room
 
     public long RoomNumber { get; set; }
 
-    public virtual ICollection<UserSustainLogRoom> UserSustainLogRooms { get; set; } = new List<UserSustainLogRoom>();
+    public virtual ICollection<UserSustainLogRoom>? UserSustainLogRooms { get; set; } = new List<UserSustainLogRoom>();
 }

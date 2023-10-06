@@ -89,9 +89,6 @@ namespace UsersUI
                             {
                                 stream.CopyTo(fileStream);//переносим данные из stream в file
                             }
-
-
-
                         }                       
 
                     }
