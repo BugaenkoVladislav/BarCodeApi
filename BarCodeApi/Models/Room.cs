@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BarCodeApi.Models;
 
@@ -9,5 +11,9 @@ public partial class Room
 
     public long RoomNumber { get; set; }
 
-    public virtual ICollection<UserSustainLogRoom>? UserSustainLogRooms { get; set; } = new List<UserSustainLogRoom>();
+    public long X { get; set; }
+
+    public long Y { get; set; }
+
+    
 }

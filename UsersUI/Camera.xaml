@@ -46,8 +46,6 @@
             Source="/rooms.png"
             Grid.ZIndex="2"
             Stretch="Fill" />
-        <Canvas Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="8" Name="myCanvas">
-            
-        </Canvas>
+        <Button Click="Button_Click"></Button>
     </Grid>
 </Window>

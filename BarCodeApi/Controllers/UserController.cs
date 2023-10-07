@@ -1,4 +1,5 @@
-﻿using IronBarCode;
+﻿using BarCodeApi.Models;
+using IronBarCode;
 using IronSoftware;
 using IronSoftware.Drawing;
 using Microsoft.AspNetCore.Http;
@@ -52,6 +53,22 @@ namespace BarCodeApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet("/ReturnAllUsersStatus")]
+        public IActionResult ReturnAllUsersStatus()
+        {
+            try
+            {
+                return Ok(db.Users.Select(m => new
+                {
+                    m.IdUser,
+                    m.IdStatus
+                }));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 
         [HttpGet("/ReturnBarCode")]
@@ -74,23 +91,6 @@ namespace BarCodeApi.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
-            }
-        }
-
-        [HttpGet("/ReturnAllUsersStatus")]
-        public IActionResult ReturnAllUsersStatus()
-        {
-            try
-            {
-                return Ok(db.Users.Select(m => new
-                {
-                    m.IdUser,
-                    m.IdStatus
-                }));
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(500, ex.Message); 
             }
         }
 

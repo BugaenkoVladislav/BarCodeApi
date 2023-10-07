@@ -22,11 +22,9 @@ public partial class ScudCrmContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    public virtual DbSet<UserSustainLogRoom> UserSustainLogRooms { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Database=ScudCRM;Password=P@ssw0rd");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Database=ScudCRM;Password=Chmonya");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -58,23 +56,6 @@ public partial class ScudCrmContext : DbContext
                 .HasForeignKey(d => d.IdStatus)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("User_Status_fkey");
-        });
-
-        modelBuilder.Entity<UserSustainLogRoom>(entity =>
-        {
-            entity.HasKey(e => e.IdUserSustainLogRoom).HasName("UserSustainLogRoom_pkey");
-
-            entity.ToTable("UserSustainLogRoom");
-
-            entity.HasOne(d => d.IdRoomNavigation).WithMany(p => p.UserSustainLogRooms)
-                .HasForeignKey(d => d.IdRoom)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("UserSustainLogRoom_IdRoom_fkey");
-
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.UserSustainLogRooms)
-                .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("UserSustainLogRoom_IdUser_fkey");
         });
 
         OnModelCreatingPartial(modelBuilder);

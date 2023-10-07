@@ -1,11 +1,11 @@
-﻿namespace BarCodeApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BarCodeApi.Models
 {
     public class HumanMovement
     {
-        public long User { get; set; }
-
-        public long Room { get; set; }
-
+        public User User { get; set; }
+        public Room Room { get; set; }
         public bool Sustain { get; set; }
     }
 }
